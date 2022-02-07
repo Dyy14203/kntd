@@ -10,7 +10,7 @@ task:
       image: 20020214/lynzx:latest
       cpu: 8
       memory: 32G
- 
+
   Build-Env-Setup_background_script:
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Setup Build"
        - export DEBIAN_FRONTEND=noninteractive
