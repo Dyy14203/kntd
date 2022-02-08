@@ -46,6 +46,7 @@ task:
       - git clone --depth=1 https://$anu@github.com/lynnnnzx/device_xiaomi_juice_r.git -b evox device/xiaomi/juice
       - rm device/evolution/sepolicy/qcom/dynamic/hal_lineage_livedisplay_qti.te
       - rm device/evolution/sepolicy/qcom/dynamic/hal_lineage_livedisplay_sysfs.te
+      - rm device/evolution/sepolicy/qcom/dynamic/dontaudit.te
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
  
   Build_script:
