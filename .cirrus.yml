@@ -49,6 +49,7 @@ task:
  
   Build_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started!"
+      - cd /tmp/rom
       - . build/envsetup.sh
       - lunch evolution_juice-user
       - export CCACHE_DIR=/tmp/ccache
