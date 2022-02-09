@@ -51,7 +51,8 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started!"
       - cd /tmp/rom
       - . build/envsetup.sh >> /dev/null 2>&1
-      - lunch evolution_juice-userdebug
+      - lunch evolution_juice-userdebug >> /dev/null 2>&1
+      - export SELINUX_IGNORE_NEVERALLOWS=true
       - make sepolicy
 #      - ./collect.sh
 #      - ./final.sh
