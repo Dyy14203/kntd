@@ -2,7 +2,7 @@
 cd /tmp/rom
 
 . build/envsetup.sh
-lunch evolution_juice-user
+lunch evolution_juice-userdebug
 export BUILD_USERNAME=lynx
 export BUILD_HOSTNAME=serber-memek
 export CCACHE_DIR=/tmp/ccache
