@@ -43,24 +43,28 @@ task:
       - repo init -q --no-repo-verify --depth=1 -u https://github.com/lynnnnzx/manifest.git -b elle -g default,-device,-mips,-darwin,-notdefault
       - git clone --depth=1 https://github.com/lynnnnzx/local_manifest.git -b evox .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - git clone --depth=1 https://$anu@github.com/lynnnnzx/device_xiaomi_juice_r.git -b evox device/xiaomi/juice
-      - rm -rf device/evolution/sepolicy/qcom/dynamic/*
+      - git clone --depth=1 https://$anu@github.com/lynnnnzx/device_xiaomi_juice_r.git -b evox-juice device/xiaomi/juice
+#      - rm -rf device/evolution/sepolicy/qcom/dynamic/*
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
  
   Build_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started!"
+      - cd /tmp/rom
+      - . build/envsetup.sh >> /dev/null 2>&1
+      - lunch evolution_juice-userdebug
+      - make sepolicy
 #      - ./collect.sh
-      - ./final.sh
+#      - ./final.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) Completed!"
 
   Upload_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) To Your Drive"
-      - rclone copy /tmp/rom/out/target/product/juice/evolution_juice*.zip lynx:juice -P
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) Uploaded Successfully!"
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
-      - ./ziping.sh
-      - cd /tmp
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz lynx:evolution -P
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) To Your Drive"
+#      - rclone copy /tmp/rom/out/target/product/juice/evolution_juice*.zip lynx:juice -P
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) Uploaded Successfully!"
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
+#      - ./ziping.sh
+#      - cd /tmp
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
+#      - rclone copy ccache.tar.gz lynx:evolution -P
       - echo " "
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Ccache Successfully!"
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Ccache Successfully!"
