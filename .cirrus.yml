@@ -49,14 +49,14 @@ task:
  
   Build_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started!"
-      - ./collect.sh
-#      - ./final.sh
+#      - ./collect.sh
+      - ./final.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) Completed!"
 
   Upload_script:
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) To Your Drive"
-#      - rclone copy /tmp/rom/out/target/product/juice/evolution_juice*.zip lynx:juice -P
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) Uploaded Successfully!"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) To Your Drive"
+      - rclone copy /tmp/rom/out/target/product/juice/evolution_juice*.zip lynx:juice -P
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls evolution_juice*.zip) Uploaded Successfully!"
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
       - ./ziping.sh
       - cd /tmp
