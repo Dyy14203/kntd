@@ -1,14 +1,14 @@
 #!/bin/bash
 cd /tmp/rom
 
-source build/envsetup.sh
-lunch lineage_juice-userdebug
 export BUILD_USERNAME=lynx
 export BUILD_HOSTNAME=serber-memek
-export CCACHE_DIR=/tmp/ccache
+export CCACHE_DIR=~/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
-ccache -M 20G
+ccache -M 100G -F 0
 ccache -o compression=true
 ccache -z
-make bacon -j8
+. build/envsetup.sh
+lunch lineage_juice-usedebug
+mka bacon -j8
