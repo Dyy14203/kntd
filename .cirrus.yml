@@ -44,7 +44,6 @@ task:
       - git clone --depth=1 https://github.com/lynnnnzx/local_manifest.git -b sakura .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       - git clone --depth=1 https://$anu@github.com/lynnnnzx/dt_xiaomi_juice.git -b sakura device/xiaomi/juice
-      - git clone --depth=1 https://github.com/lynnnnzx/android_vendor_GBoardLite vendor/GBoardLite
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
 
   Build_script:
