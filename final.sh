@@ -10,5 +10,5 @@ ccache -M 100G -F 0
 ccache -o compression=true
 ccache -z
 . build/envsetup.sh
-lunch lineage_juice-usedebug
+lunch lineage_juice-userdebug
 mka bacon -j8
