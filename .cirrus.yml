@@ -48,6 +48,7 @@ task:
 
   Build_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started!"
+      - export PLATFORM_SECURITY_PATCH=2022-02-05
       - ./collect.sh
 #      - ./final.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls ProjectSakura*.zip) Completed!"
