@@ -40,7 +40,7 @@ task:
   Sync_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start Sync Source"
       - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/lynnnnzx/android -b 11 -g default,-device,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u git://github.com/ProjectSakura/android.git -b 11 -g default,-device,-mips,-darwin,-notdefault
       - git clone --depth=1 https://github.com/lynnnnzx/local_manifest.git -b sakura .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 --fail-fast
       - git clone --depth=1 https://$anu@github.com/lynnnnzx/dt_xiaomi_juice.git -b sakura device/xiaomi/juice
