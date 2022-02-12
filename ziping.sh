@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd /tmp
+sleep 1m
+
+cd ~/
 
 com ()
 {
