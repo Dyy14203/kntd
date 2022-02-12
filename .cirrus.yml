@@ -45,6 +45,7 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
 
   Build_script:
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started"
       - ./collect.sh
 #      - ./final.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls Cherish*.zip) Completed!"
