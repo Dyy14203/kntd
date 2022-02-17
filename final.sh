@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ~/rom
 
-. build/envsetup.sh
+source build/envsetup.sh
 export BUILD_USERNAME=lynx
 export BUILD_HOSTNAME=cirrus-ci
 export SELINUX_IGNORE_NEVERALLOWS=true
