@@ -55,7 +55,7 @@ task:
       - ./ziping_out.sh
 #      - ./ziping.sh
 #      - cd ~/
-	  - cd ~/rom
+	  - cd /home/cirrus/rom
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
 #      - rclone copy ccache.tar.gz lynx:cipher -P
       - rclone copy out.tar.gz lynx:cipher -P
