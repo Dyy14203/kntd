@@ -52,7 +52,7 @@ task:
 #      - rclone copy ~/rom/out/target/product/juice/CipherOS*.zip lynx:juice -P
 #      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls CipherOS*.zip) Uploaded Successfully!"
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
-      - ./ziping_out.sh
+      - ./out.sh
 #      - ./ziping.sh
 #      - cd ~/
 	  - cd /home/cirrus/rom
