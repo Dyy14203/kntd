@@ -16,7 +16,8 @@ task:
 
   Clone_script:
       - cd ~/
-      - git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git -b 12.0 clang
+      - rm -rf clang
+      - git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git -b 12.0 --single-branch clang
 
   Push_script:
       - cd ~/clang
@@ -24,9 +25,10 @@ task:
       - git init
       - git config --global user.name "lynnnnzx"
       - git config --global user.email "rifqikanekii140202@gmail.com"
+      - git config --global http.version HTTP/1.1
       - git add .
       - git checkout -b 12.0
       - git commit -asm "Import clang-r445002 From Crdroid Gitlab"
       - git remote add origin https://github.com/lynnnnzx/prebuilts_clang_host_linux-x86_clang-r445002.git
       - git remote set-url origin https://$anu@github.com/lynnnnzx/prebuilts_clang_host_linux-x86_clang-r445002.git
-      - git push origin 12.0 -f
+      - git push origin 12.0
