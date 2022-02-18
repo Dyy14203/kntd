@@ -52,8 +52,11 @@ task:
 #      - rclone copy ~/rom/out/target/product/juice/CipherOS*.zip lynx:juice -P
 #      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls CipherOS*.zip) Uploaded Successfully!"
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
-      - ./ziping.sh
-      - cd ~/
+      - ./ziping_out.sh
+#      - ./ziping.sh
+#      - cd ~/
+	  - cd ~/rom
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz lynx:cipher -P
+#      - rclone copy ccache.tar.gz lynx:cipher -P
+      - rclone copy out.tar.gz lynx:cipher -P
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Succesfully"
