@@ -4,7 +4,6 @@ cd ~/rom
 . build/envsetup.sh
 export BUILD_USERNAME=lynx
 export BUILD_HOSTNAME=cirrus-ci
-export SELINUX_IGNORE_NEVERALLOWS=true
 export TZ=Asia/Jakarta
 export CCACHE_DIR=~/ccache
 export CCACHE_EXEC=$(which ccache)
