@@ -27,7 +27,7 @@ task:
 #       - ccache --clear
 #       - cd ~/
 #       - time tar xf ccache.tar.gz
-ß       - cd ~/
+#       - cd ~/
   
   Storage-Checker_background_script:
       - df -h
