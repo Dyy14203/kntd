@@ -2,19 +2,16 @@ env:
     rcloneconfig: "ENCRYPTED[!9f81da4162dc16855010f240d3286f375c27728a69e6914e2176d084ab84834123f58ab38a8d58a9045ca289b356ffe7!]"
     tokentl: "ENCRYPTED[!ae59da153d5f935b3881c1893275b291da5839a0053b0fb4bb8181be51235ed22c507590188eb689e8688330a37fa345!]"
     idtl: "ENCRYPTED[!56736621437270350d1544901100e462298ee6e58797da7f214f748f84c3e85dad01991898a7fd6cc0f5a407e917aaea!]"
-    lunch: lunch aosp_juice-userdebug
-    make: mka bacon
 
 task:
   name: "Get Vendor Only From MIUI Rom..."
   timeout_in: 480m  
   container:
       image: inok2341/anu:latest
-      cpu: 2
-      memory: 8G
+      cpu: 4
+      memory: 16G
         
-  Build-Env-Setup_background_script:
-       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Setup Build"
+  Env-Setup_background_script:
        - export DEBIAN_FRONTEND=noninteractive
        - mkdir -p ~/.config/rclone
        - echo "$rcloneconfig" > ~/.rclone.conf
@@ -26,9 +23,9 @@ task:
       - lsblk
       - ls -l -a -h
       - ./w.sh
-  
+
   Download_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Dowmload miui_CITRUSIDGlobal_V12.5.5.0.RJFIDXM_80dd68c75a_11.0.zip Started"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Download miui_CITRUSIDGlobal_V12.5.5.0.RJFIDXM_80dd68c75a_11.0.zip Started"
       - mkdir -p ~/vendor
       - cd ~/vendor
       - rm -rf *
@@ -36,7 +33,7 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Download Completed!"
 
   Zipping_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ziping Started"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Extracting Started!"
       - cd ~/vendor
       - apt install sudo -y
       - sudo apt install zip -y
