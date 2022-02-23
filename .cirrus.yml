@@ -8,7 +8,7 @@ task:
   timeout_in: 480m  
   container:
       image: inok2341/anu:latest
-      cpu: 8
+      cpu: 4
       memory: 16G
         
   Env-Setup_background_script:
