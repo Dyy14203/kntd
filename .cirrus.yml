@@ -35,7 +35,7 @@ task:
       - curl -O https://bigota.d.miui.com/V12.5.5.0.RJFIDXM/miui_CITRUSIDGlobal_V12.5.5.0.RJFIDXM_80dd68c75a_11.0.zip
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Download Completed!"
 
-  Zipping_script:7
+  Zipping_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ziping Started"
       - cd ~/vendor
       - apt install sudo -y
