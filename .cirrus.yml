@@ -40,7 +40,6 @@ task:
       - ls
       - rm *.zip
       - rm system*
-      - rm system_ext*
       - rm product*
       - zip -r9 vendor_miui-CITRUSIDGlobal_V12.5.5.0.RJFIDXM.zip *
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="File $(cd ~/vendor/ && ls vendor*.zip) Successfully Created!"
