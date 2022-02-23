@@ -3,7 +3,7 @@ cd ~/rom
 
 . build/envsetup.sh
 export BUILD_USERNAME=lynx
-export BUILD_HOSTNAME=serber-memek
+export BUILD_HOSTNAME=cirrus-ci
 export TZ=Asia/Jakarta
 export CCACHE_DIR=~/ccache
 export CCACHE_EXEC=$(which ccache)
