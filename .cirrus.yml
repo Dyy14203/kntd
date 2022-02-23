@@ -36,17 +36,12 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Repacking Started!"
       - cd ~/vendor
       - sudo apt update
-      - sudo apt install zip brotli -y
+      - sudo apt install zip -y
       - unzip *.zip
       - ls
       - rm *.zip
       - rm system*
       - rm product*
-      - brotli -d vendor.new.dat.br
-      - rm vendor.new.dat.br
-      - brotli vendor.new.dat -q 7
-      - rm vendor.new.dat
-      - ls
       - zip -r9 vendor_miui-CITRUSIDGlobal_V12.5.5.0.RJFIDXM.zip *
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="File $(cd ~/vendor/ && ls vendor*.zip) Successfully Created!"
 
