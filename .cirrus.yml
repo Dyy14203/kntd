@@ -36,7 +36,7 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/lynnnnzx/manifest.git -b snowcone -g default,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/PixelPlusUI-SnowCone/manifest.git -b snowcone -g default,-mips,-darwin,-notdefault
       - git clone https://github.com/lynnnnzx/local_manifest.git --depth 1 -b twelve-ppui .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 --fail-fast
       - cd build/make/tools/releasetools
