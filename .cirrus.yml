@@ -21,13 +21,13 @@ task:
        - git config --global user.name "lynnnnzx"
        - git config --global user.email "rifqikanekii140202@gmail.com"
        - mkdir -p ~/ccache
-       - rclone copy lynx:twelve-ppui/ccache.tar.gz ~/ -P
+#       - rclone copy lynx:twelve-ppui/ccache.tar.gz ~/ -P
 #       - export CCACHE_DIR=~/ccache
 #       - export CCACHE_EXEC=$(which ccache)
 #       - ccache --clear
-       - cd ~/
-       - time tar xf ccache.tar.gz
-       - cd ~/
+#       - cd ~/
+#       - time tar xf ccache.tar.gz
+ß       - cd ~/
   
   Storage-Checker_background_script:
       - df -h
@@ -39,26 +39,29 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/PixelPlusUI-SnowCone/manifest.git -b snowcone -g default,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/lynnnnzx/manifest.git -b snowcone -g default,-mips,-darwin,-notdefault
       - git clone https://github.com/lynnnnzx/local_manifest.git --depth 1 -b twelve-ppui .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 --fail-fast
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
 
   Build_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started"
+      - rm -rf ~/rom/.repo
+      - ./ziping_rom.sh
 #      - ./collect.sh
-      - ./final.sh
+#      - ./final.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip) Completed!"
 
   Upload_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip)"
-      - rclone copy ~/rom/out/target/product/juice/PixelPlusUI*.zip lynx:juice -P
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip) Uploaded Successfully!"
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip)"
+#      - rclone copy ~/rom/out/target/product/juice/PixelPlusUI*.zip lynx:juice -P
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip) Uploaded Successfully!"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
 #      - ./ziping.sh
-#      - cd ~/
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
+      - cd ~/
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
 #      - rclone copy ccache.tar.gz lynx:twelve-ppui -P
-      - rclone copy ~/rom/out/target/product/juice/obj/KERNEL_OBJ/arch/arm64/boot/Image.gz lynx:twelve-ppui -P
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Succesfully"
+      - rclone copy rom.tar.gz lynx:twelve-ppui -P
+#      - rclone copy ~/rom/out/target/product/juice/obj/KERNEL_OBJ/arch/arm64/boot/Image.gz lynx:twelve-ppui -P
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Succesfully"
 
