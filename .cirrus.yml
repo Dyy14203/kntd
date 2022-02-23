@@ -8,7 +8,7 @@ task:
   timeout_in: 480m  
   container:
       image: inok2341/anu:latest
-      cpu: 4
+      cpu: 8
       memory: 16G
         
   Env-Setup_background_script:
@@ -35,7 +35,6 @@ task:
   Zipping_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Extracting Started!"
       - cd ~/vendor
-      - apt install sudo -y
       - sudo apt install zip -y
       - unzip *.zip
       - ls
