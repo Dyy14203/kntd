@@ -34,10 +34,15 @@ task:
   
   Sync_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
+      - rm -rf ~/bin
+      - mkdir -p ~/bin
+      - export PATH=~/bin:$PATH
+      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+      - chmod a+x ~/bin/repo
       - mkdir -p ~/rom
       - cd ~/rom
       - sudo rm -rf .repo
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/xdroid-oss/xd_manifest.git -b twelve -g default,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/lynnnnzx/xd_manifest.git -b twelve -g default,-mips,-darwin,-notdefault
       - git clone https://github.com/lynnnnzx/local_manifest.git --depth 1 -b xdroid-ysl .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 --fail-fast
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
