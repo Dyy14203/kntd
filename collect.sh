@@ -16,4 +16,3 @@ $make -j8 &
 sleep 104m
 kill %1
 ccache -s
-
