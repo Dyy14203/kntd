@@ -34,11 +34,11 @@ task:
   
   Sync_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
-      - rm -rf ~/bin
-      - mkdir -p ~/bin
-      - export PATH=~/bin:$PATH
-      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-      - chmod a+x ~/bin/repo
+      - sudo rm -rf ~/.bin
+      - mkdir -p ~/.bin
+      - export PATH=~/.bin:$PATH
+      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+      - chmod a+x ~/.bin/repo
       - mkdir -p ~/rom
       - cd ~/rom
       - rm -rf .repo
