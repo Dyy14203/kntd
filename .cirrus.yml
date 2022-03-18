@@ -4,7 +4,7 @@ task:
   name: "Setting Up, Syncing, Building and Uploading..."
   timeout_in: 480m  
   container:
-      image: 20020214/lynzx:latest
+      image: inok2341/anu:latest
       cpu: 8
       memory: 32G
  
@@ -13,7 +13,8 @@ task:
        - apt update
        - apt install sudo
        - DEBIAN_FRONTEND=noninteractive
-       - sudo apt install python3 -y
+       - echo "" > ~/.git-credentials
+       - sudo apt install python3 ninja-build -y
        - sudo ln -sf /usr/bin/python3 /usr/bin/python
        - git config --global user.name "lynnnnzx"
        - git config --global user.email "rifqikanekii140202@gmail.com"
@@ -24,10 +25,10 @@ task:
       - ls -l -a -h
   
   Sync_script:
-      - cd /tmp/rom
+      - cd ~/
       - git clone https://$anu@github.com/lynnnnzx/tc-build.git
 
   Build_script:
-      - cd /tmp/rom/tc-build
+      - cd ~/tc-build
       - chmod +x build-tc.sh
       - ./build-tc.sh
