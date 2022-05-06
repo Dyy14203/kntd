@@ -1,9 +1,10 @@
 env:
-    rcloneconfig: "ENCRYPTED[!9f81da4162dc16855010f240d3286f375c27728a69e6914e2176d084ab84834123f58ab38a8d58a9045ca289b356ffe7!]"
-    tokentl: "ENCRYPTED[!ae59da153d5f935b3881c1893275b291da5839a0053b0fb4bb8181be51235ed22c507590188eb689e8688330a37fa345!]"
-    idtl: "ENCRYPTED[!56736621437270350d1544901100e462298ee6e58797da7f214f748f84c3e85dad01991898a7fd6cc0f5a407e917aaea!]"
-    lunch: lunch aosp_juice-userdebug
-    make: mka bacon
+    credentials: "ENCRYPTED[!8147cb72c7dd196ab9d3c078e4489d3cea8a9859ee2ce15961856c4ecbcfd3ac6274e381c899122a3540da235c407e31!]"
+    rcloneconfig: "ENCRYPTED[!47a1d8ea0882f79f5e2c6924f4378d96e838938603e20a2be68f3e1b435f7152fde4e3871cc2c22860a32029e39b5519!]"
+    tokentl: "ENCRYPTED[!72ad07ee7a6a8b34799858263fe0aa3d2922b50005fd57120a6a3afa462ade05cbdd296ccfdf42cf97b614372dbd39e1!]"
+    idtl: "ENCRYPTED[!d2b96ef40bc9bfd865ce74298f7306133e2c70f4bef1453c9bb8c958a444d5e2e2c566f824157123a821f795c0929b3a!]"
+    lunch: lunch aosqp_juice-userdebug
+    make: mka qassa
 
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
@@ -18,10 +19,12 @@ task:
        - export DEBIAN_FRONTEND=noninteractive
        - mkdir -p ~/.config/rclone
        - echo "$rcloneconfig" > ~/.rclone.conf
-       - git config --global user.name "lynnnnzx"
+       - git config --global user.name "Lynx"
        - git config --global user.email "rifqikanekii140202@gmail.com"
+       - echo "$credentials" > ~/.git-credentials
+       - git config --global credential.helper store --file=~/.git-credentials
        - mkdir -p ~/ccache
-       - rclone copy lynx:twelve-ppui/ccache.tar.gz ~/ -P
+       - rclone copy lynx:aosqp/ccache.tar.gz ~/ -P
        - cd ~/
        - time tar xf ccache.tar.gz
        - cd ~/
@@ -36,29 +39,27 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/PixelPlusUI-SnowCone/manifest.git -b snowcone -g default,-mips,-darwin,-notdefault
-      - git clone https://github.com/lynnnnzx/local_manifest.git --depth 1 -b twelve-ppui .repo/local_manifests
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 --fail-fast
-      - cd build/make/tools/releasetools
-      - ls
-      - rm common.py
-      - curl -O https://transfer.sh/get/xxkccC/common.py && chmod +x common.py
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/lynnnnzx/manifest.git -b Q -g default,-mips,-darwin,-notdefault
+      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+      - git clone https://github.com/lynnnnzx/android_device_xiaomi_juice-q -b qassa device/xiaomi/juice
+      - git clone https://github.com/lynnnnzx/android_vendor_xiaomi_juice-q -b 10.staging vendor/xiaomi/juice
+      - git clone https://github.com/frstprjkt/kernel_xiaomi_juice-Q -b frost.staging kernel/xiaomi/juice --depth 1
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
 
   Build_script:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started"
-#      - ./collect.sh
-      - ./final.sh
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip) Completed!"
+      - ./collect.sh
+#      - ./final.sh
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls AOSQP*.zip) Completed!"
 
   Upload_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip)"
-      - rclone copy ~/rom/out/target/product/juice/PixelPlusUI*.zip lynx:juice -P
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls PixelPlusUI*.zip) Uploaded Successfully!"
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
-#      - ./ziping.sh
-#      - cd ~/
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-#      - rclone copy ccache.tar.gz lynx:twelve-ppui -P
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Succesfully"
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/juice/ && ls AOSQP*.zip)"
+#      - rclone copy ~/rom/out/target/product/juice/AOSQP*.zip lynx:juice -P
+#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls AOSQP*.zip) Uploaded Successfully!"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
+      - ./ziping.sh
+      - cd ~/
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
+      - rclone copy ccache.tar.gz lynx:aosqp -P
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Succesfully"
 
