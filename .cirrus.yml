@@ -1,8 +1,4 @@
 env:
-    credentials: "ENCRYPTED[!8147cb72c7dd196ab9d3c078e4489d3cea8a9859ee2ce15961856c4ecbcfd3ac6274e381c899122a3540da235c407e31!]"
-    rcloneconfig: "ENCRYPTED[!47a1d8ea0882f79f5e2c6924f4378d96e838938603e20a2be68f3e1b435f7152fde4e3871cc2c22860a32029e39b5519!]"
-    tokentl: "ENCRYPTED[!72ad07ee7a6a8b34799858263fe0aa3d2922b50005fd57120a6a3afa462ade05cbdd296ccfdf42cf97b614372dbd39e1!]"
-    idtl: "ENCRYPTED[!d2b96ef40bc9bfd865ce74298f7306133e2c70f4bef1453c9bb8c958a444d5e2e2c566f824157123a821f795c0929b3a!]"
     lunch: lunch aosqp_juice-userdebug
     make: mka qassa
 
@@ -14,13 +10,10 @@ task:
       cpu: 2
       memory: 8G
         
-  Build-Env-Setup_background_script:
-       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Setup Build"
+  Anu_script:
        - export DEBIAN_FRONTEND=noninteractive
        - git config --global user.name "Lynx"
        - git config --global user.email "rifqikanekii140202@gmail.com"
-       - echo "$credentials" > ~/.git-credentials
-       - git config --global credential.helper store --file=~/.git-credentials
        - cd ~/
        - git clone https://github.com/mvaisakh/gcc-arm64 -b gcc-master gcc
        - ./gcc/bin/aarch64-elf-gcc-13.0.0 --version
