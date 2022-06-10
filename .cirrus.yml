@@ -12,7 +12,7 @@ task:
   container:
       image: inok2341/anu:latest
       cpu: 2
-      memory: 16G
+      memory: 8G
         
   Build-Env-Setup_background_script:
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Setup Build"
