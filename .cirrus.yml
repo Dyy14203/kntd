@@ -11,55 +11,19 @@ task:
   timeout_in: 480m  
   container:
       image: inok2341/anu:latest
-      cpu: 8
-      memory: 32G
+      cpu: 2
+      memory: 16G
         
   Build-Env-Setup_background_script:
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Setup Build"
        - export DEBIAN_FRONTEND=noninteractive
-       - mkdir -p ~/.config/rclone
-       - echo "$rcloneconfig" > ~/.rclone.conf
        - git config --global user.name "Lynx"
        - git config --global user.email "rifqikanekii140202@gmail.com"
        - echo "$credentials" > ~/.git-credentials
        - git config --global credential.helper store --file=~/.git-credentials
-       - mkdir -p ~/ccache
-       - rclone copy lynx:aosqp/ccache.tar.gz ~/ -P
        - cd ~/
-       - time tar xf ccache.tar.gz
-       - cd ~/
-  
-  Storage-Checker_background_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
-      - ./w.sh
-  
-  Sync_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
-      - mkdir -p ~/rom
-      - cd ~/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/lynnnnzx/manifest.git -b Q -g default,-mips,-darwin,-notdefault
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - git clone https://github.com/lynnnnzx/android_device_xiaomi_juice-q -b qassa device/xiaomi/juice
-      - git clone https://github.com/lynnnnzx/android_vendor_xiaomi_juice-q -b 10.staging vendor/xiaomi/juice
-      - git clone https://github.com/frstprjkt/kernel_xiaomi_juice-Q -b frost.staging kernel/xiaomi/juice --depth 1
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
-
-  Build_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started"
-#      - ./collect.sh
-      - ./final.sh
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls AOSQP*.zip) Completed!"
-
-  Upload_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/juice/ && ls AOSQP*.zip)"
-      - rclone copy ~/rom/out/target/product/juice/AOSQP*.zip lynx:juice -P
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/juice/ && ls AOSQP*.zip) Uploaded Successfully!"
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
-      - ./ziping.sh
-      - cd ~/
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz lynx:aosqp -P
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Succesfully"
-
+       - git clone https://github.com/mvaisakh/gcc-arm64 -b gcc-master gcc
+       - ./gcc/bin/aarch64-elf-gcc-13.0.0 --version
+       - ./gcc/bin/aarch64-elf-gcc --version
+       - ./gcc/bin/aarch64-elf-ld.lld --version
+       - ./gcc/bin/aarch64-elf-ld --version
