@@ -15,7 +15,7 @@ task:
        - git config --global user.name "Lynx"
        - git config --global user.email "rifqikanekii140202@gmail.com"
        - cd ~/
-       - git clone https://github.com/mvaisakh/gcc-arm64 -b gcc-master gcc
+       - git clone --depth 1 https://github.com/mvaisakh/gcc-arm64 -b gcc-master gcc
        - ./gcc/bin/aarch64-elf-gcc-13.0.0 --version
        - ./gcc/bin/aarch64-elf-gcc --version
        - ./gcc/bin/aarch64-elf-ld.lld --version
