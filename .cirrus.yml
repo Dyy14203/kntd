@@ -57,15 +57,12 @@ task:
       - export KBUILD_BUILD_HOST=IDN-Labs
       - sudo ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started!"
-      - ./collect.sh
-#      - ./final.sh
+#      - ./collect.sh
+      - ./final.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/ysl/ && ls qassa-*.zip) Completed!"
 
   Upload_script:
-#      - curl -sL https://git.io/file-transfer | sh && ./transfer wet ~/rom/out/target/product/ysl/qassa-*.zip
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/ysl/ && ls qassa-*.zip)"
-#      - rclone copy ~/rom/out/target/product/ysl/qassa-*.zip venyx:ysl -P
-#      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/ysl/ && ls qassa-*.zip) Uploaded Successfully!"
+      - ./upload.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
       - ./ziping.sh
       - cd ~/
